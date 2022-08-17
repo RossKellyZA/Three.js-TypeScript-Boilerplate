@@ -20,7 +20,7 @@ npm install
 npm run dev
 ```
 
-4. Visit [http://127.0.0.1:8080](http://127.0.0.1:8080)
+4. Visit [http://localhost:8080](http://localhost:8080)
 
 You should see a rotating green wireframe cube, and be able to rotate it further with your mouse.
 
