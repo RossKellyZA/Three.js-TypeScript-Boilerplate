@@ -38,3 +38,18 @@ npm run build
 ```bash
 npm run deploy
 ```
+
+
+### Reference
+This boilerplate was built following these tutuiorial
+
+Development Environment setup:
+- [Begin Creating the Three.js Project](https://sbcode.net/threejs/setup-dev/)
+- [Add the Initial Scripts](https://sbcode.net/threejs/add-initial-scripts/)
+- [Setting up the Webpack Dev Server](https://sbcode.net/threejs/webpack-dev-server/)
+- [Importing Three.js Modules](https://sbcode.net/threejs/import-threejs-modules/)
+- [Three.js Typescript Boilerplate](https://sbcode.net/threejs/threejs-typescript-boilerplate/)
+
+Deployment:
+- [Setup a Webpack Production Configuration](https://sbcode.net/threejs/webpack-prod/)
+- [Host using GitHub Pages](https://sbcode.net/threejs/webpack-prod/)
