@@ -1,15 +1,15 @@
-import * as THREE from 'three'
+import * as THREE from 'three';
+//import { ARButton } from 'ARButton.js';
+import Stats from 'three/examples/jsm/libs/stats.module';
+import { VRButton } from 'three/examples/jsm/webxr/VRButton'
 import { Int8Attribute } from 'three';
-
-//TODO
-//.gitignore
-//add XR button
 
 let camera: THREE.PerspectiveCamera;
 let scene: THREE.Scene;
 let renderer: THREE.WebGLRenderer;
 
 let cube: THREE.Mesh;
+let stats: Stats;
 
 init();
 animate();
@@ -23,15 +23,21 @@ function init() {
         0.1,
         1000
     );
-    camera.position.z = 2
+    camera.position.z = 4;
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false } );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.xr.enabled = true;
+    
+    
     document.body.appendChild(renderer.domElement);
 
     setupCube();
+    document.body.appendChild(VRButton.createButton(renderer))
+
+    stats = Stats();  
+    document.body.appendChild(stats.dom);
 
     window.addEventListener('resize', onWindowResize, false);
 
@@ -48,11 +54,14 @@ function setupCube(){
     scene.add(cube);
 }
 
+
 function animate() {
     requestAnimationFrame(animate);
 
     cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    cube.rotation.y += -0.01;
+
+    stats.update();
 
     render();
 }
