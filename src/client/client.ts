@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-//import { ARButton } from 'ARButton.js';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton'
 import { Int8Attribute } from 'three';
@@ -12,7 +11,6 @@ let cube: THREE.Mesh;
 let stats: Stats;
 
 init();
-animate();
 
 function init() {
     scene = new THREE.Scene()
@@ -23,13 +21,14 @@ function init() {
         0.1,
         1000
     );
+    camera.position.x = 0;
+    camera.position.y = 0;
     camera.position.z = 4;
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false } );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.xr.enabled = true;
-    
     
     document.body.appendChild(renderer.domElement);
 
@@ -41,6 +40,8 @@ function init() {
 
     window.addEventListener('resize', onWindowResize, false);
 
+    renderer.setAnimationLoop(update);
+
 }
 
 function setupCube(){
@@ -51,19 +52,10 @@ function setupCube(){
     });
 
     cube = new THREE.Mesh(geometry, material);
+    cube.position.x = 0;
+    cube.position.y = 1.6;
+    cube.position.z = -2;
     scene.add(cube);
-}
-
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    cube.rotation.x += 0.01;
-    cube.rotation.y += -0.01;
-
-    stats.update();
-
-    render();
 }
 
 function onWindowResize() {
@@ -72,7 +64,18 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function render() {
+function update() {
+
+    updateCube();
+    stats.update();
+
     renderer.render(scene, camera);
 }
+
+function updateCube(){
+    cube.rotation.x += 0.01;
+    cube.rotation.y += -0.01;
+}
+
+
 
