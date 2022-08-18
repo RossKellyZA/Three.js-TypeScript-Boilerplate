@@ -47,13 +47,13 @@ function init() {
 
 function setupCubes(){
     
-    cube1 = new Box(scene, renderer, new THREE.Color("rgb(255, 0, 0)"), new THREE.Vector3(-2, 1.6, -2));
+    cube1 = new Box(scene, new THREE.Color("rgb(255, 0, 0)"), new THREE.Vector3(-2, 1.6, -2));
     scene.add(cube1.getbox());
 
-    cube2 = new Box(scene, renderer,  new THREE.Color("rgb(0, 255, 0)"), new THREE.Vector3(0, 1.6, -2));
+    cube2 = new Box(scene, new THREE.Color("rgb(0, 255, 0)"), new THREE.Vector3(0, 1.6, -2));
     scene.add(cube2.getbox());
 
-    cube3 = new Box(scene, renderer,  new THREE.Color("rgb(0, 0, 255)"), new THREE.Vector3(2, 1.6, -2));
+    cube3 = new Box(scene, new THREE.Color("rgb(0, 0, 255)"), new THREE.Vector3(2, 1.6, -2));
     scene.add(cube3.getbox());
 }
 

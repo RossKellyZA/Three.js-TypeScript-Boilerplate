@@ -5,12 +5,10 @@ export default class Box {
     private material: THREE.MeshBasicMaterial;
     private _color: THREE.ColorRepresentation;
     private _cube: THREE.Mesh;
-    private _renderer: THREE.WebGLRenderer;
 
-    constructor(scene: THREE.Scene, renderer: THREE.WebGLRenderer, color: THREE.ColorRepresentation, position: THREE.Vector3) {
+    constructor(scene: THREE.Scene, color: THREE.ColorRepresentation, position: THREE.Vector3) {
 
         this._color = color;
-        this._renderer = renderer
 
         this.geometry = new THREE.BoxGeometry();
         this.material = new THREE.MeshBasicMaterial({
@@ -22,8 +20,6 @@ export default class Box {
         this._cube.position.x = position.x;
         this._cube.position.y = position.y;
         this._cube.position.z = position.z;
-
-        renderer.setAnimationLoop(this.update);
     }
 
     public getbox() {
