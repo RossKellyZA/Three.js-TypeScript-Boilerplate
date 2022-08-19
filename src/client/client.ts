@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 import Stats from 'three/examples/jsm/libs/stats.module';
 import { VRButton } from 'three/examples/jsm/webxr/VRButton';
-import Box from './src/exampleBox';
+import ExampleBox from './src/exampleBox';
+import ExampleSound from './src/exampleSound';
+import ExampleTexture from './src/exampleTexture';
 
 let camera: THREE.PerspectiveCamera;
 let scene: THREE.Scene;
@@ -9,14 +11,16 @@ let renderer: THREE.WebGLRenderer;
 
 let stats: Stats;
 
-let cube1: Box;
-let cube2: Box;
-let cube3: Box;
+let cube1: ExampleBox;
+let cube2: ExampleBox;
+let cube3: ExampleBox;
+let texture: ExampleTexture
+let sound: ExampleSound;
 
 init();
 
 function init() {
-    scene = new THREE.Scene()
+    scene = new THREE.Scene();
 
     //Setup Camera
     camera = new THREE.PerspectiveCamera(
@@ -38,29 +42,38 @@ function init() {
     stats = Stats();  
     document.body.appendChild(stats.dom);
 
+    //Example Content
+    const light = new THREE.PointLight(0xffffff, 1);
+    light.position.set(0, 5, 10);
+    scene.add(light);
+
     setupCubes();
+    setupTexture();
+    setupSound();
 
     window.addEventListener('resize', onWindowResize, false);
-
+    window.addEventListener('click', onWindowClick, false);
     renderer.setAnimationLoop(update);
 }
 
 function setupCubes(){
     
-    cube1 = new Box(scene, new THREE.Color("rgb(255, 0, 0)"), new THREE.Vector3(-2, 1.6, -2));
+    cube1 = new ExampleBox(scene, new THREE.Color("rgb(255, 0, 0)"), new THREE.Vector3(-2, 1.6, -2));
     scene.add(cube1.getbox());
 
-    cube2 = new Box(scene, new THREE.Color("rgb(0, 255, 0)"), new THREE.Vector3(0, 1.6, -2));
+    cube2 = new ExampleBox(scene, new THREE.Color("rgb(0, 255, 0)"), new THREE.Vector3(0, 1.6, -2));
     scene.add(cube2.getbox());
 
-    cube3 = new Box(scene, new THREE.Color("rgb(0, 0, 255)"), new THREE.Vector3(2, 1.6, -2));
+    cube3 = new ExampleBox(scene, new THREE.Color("rgb(0, 0, 255)"), new THREE.Vector3(2, 1.6, -2));
     scene.add(cube3.getbox());
 }
 
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+function setupTexture(){
+    texture = new ExampleTexture(scene, camera);
+}
+
+function setupSound(){
+    sound = new ExampleSound(scene, camera);
 }
 
 function update() {
@@ -72,6 +85,16 @@ function update() {
     cube3.update();
 
     renderer.render(scene, camera);
+}
+
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function onWindowClick() {
+    sound.playSound();
 }
 
 
