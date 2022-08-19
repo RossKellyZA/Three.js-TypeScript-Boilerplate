@@ -8,6 +8,9 @@ export default class ExampleTexture {
         const texture = new THREE.TextureLoader().load('./assets/textures/worldColour.5400x2700.jpg');
         material.map = texture;
         const plane = new THREE.Mesh(planeGeometry, material);
+        plane.position.x = 0;
+        plane.position.y = 0;
+        plane.position.z = -2;
         scene.add(plane);
     }
 }

@@ -8,7 +8,6 @@ import ExampleTexture from './src/exampleTexture';
 let camera: THREE.PerspectiveCamera;
 let scene: THREE.Scene;
 let renderer: THREE.WebGLRenderer;
-
 let stats: Stats;
 
 let cube1: ExampleBox;
@@ -50,7 +49,7 @@ function init() {
     setupCubes();
     setupTexture();
     setupSound();
-
+    
     window.addEventListener('resize', onWindowResize, false);
     window.addEventListener('click', onWindowClick, false);
     renderer.setAnimationLoop(update);
