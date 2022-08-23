@@ -9,7 +9,7 @@ export default class ExampleTexture {
         material.map = texture;
         const plane = new THREE.Mesh(planeGeometry, material);
         plane.position.x = 0;
-        plane.position.y = 0;
+        plane.position.y = -0.5;
         plane.position.z = -2;
         scene.add(plane);
     }

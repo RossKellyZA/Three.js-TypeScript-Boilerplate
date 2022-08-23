@@ -4,12 +4,15 @@ import { VRButton } from 'three/examples/jsm/webxr/VRButton';
 import ExampleBox from './src/exampleBox';
 import ExampleSound from './src/exampleSound';
 import ExampleTexture from './src/exampleTexture';
+import ExampleIFrame from './src/exampleIFrame';
+import { Vector3 } from 'three';
 
 let camera: THREE.PerspectiveCamera;
 let scene: THREE.Scene;
 let renderer: THREE.WebGLRenderer;
 let stats: Stats;
 
+let iframe1: ExampleIFrame;
 let cube1: ExampleBox;
 let cube2: ExampleBox;
 let cube3: ExampleBox;
@@ -36,7 +39,7 @@ function init() {
     renderer.xr.enabled = true;
     
     document.body.appendChild(renderer.domElement);
-    document.body.appendChild(VRButton.createButton(renderer))
+    document.body.appendChild(VRButton.createButton(renderer));
 
     stats = Stats();  
     document.body.appendChild(stats.dom);
@@ -46,24 +49,35 @@ function init() {
     light.position.set(0, 5, 10);
     scene.add(light);
 
+    setupIFrames();
+
     setupCubes();
     setupTexture();
     setupSound();
-    
+
     window.addEventListener('resize', onWindowResize, false);
     window.addEventListener('click', onWindowClick, false);
+
     renderer.setAnimationLoop(update);
+}
+
+function setupIFrames(){
+  iframe1 = new ExampleIFrame(renderer, 
+    scene, 
+    camera,
+    'https://threejs.org/', 
+    new Vector3(0,2.8,-2));
 }
 
 function setupCubes(){
     
-    cube1 = new ExampleBox(scene, new THREE.Color("rgb(255, 0, 0)"), new THREE.Vector3(-2, 1.6, -2));
+    cube1 = new ExampleBox(scene, new THREE.Color("rgb(255, 0, 0)"), new THREE.Vector3(-2, 1, -2));
     scene.add(cube1.getbox());
 
-    cube2 = new ExampleBox(scene, new THREE.Color("rgb(0, 255, 0)"), new THREE.Vector3(0, 1.6, -2));
+    cube2 = new ExampleBox(scene, new THREE.Color("rgb(0, 255, 0)"), new THREE.Vector3(0, 1, -2));
     scene.add(cube2.getbox());
 
-    cube3 = new ExampleBox(scene, new THREE.Color("rgb(0, 0, 255)"), new THREE.Vector3(2, 1.6, -2));
+    cube3 = new ExampleBox(scene, new THREE.Color("rgb(0, 0, 255)"), new THREE.Vector3(2, 1, -2));
     scene.add(cube3.getbox());
 }
 
@@ -76,8 +90,10 @@ function setupSound(){
 }
 
 function update() {
-
+    
     stats.update();
+
+    iframe1.update();
 
     cube1.update();
     cube2.update();
@@ -90,12 +106,9 @@ function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    iframe1.onWindowResize();
 }
 
 function onWindowClick() {
     sound.playSound();
 }
-
-
-
-
