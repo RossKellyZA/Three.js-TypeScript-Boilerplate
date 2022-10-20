@@ -42,7 +42,6 @@ export default class ExampleIFrame {
         webglCanvas.style.pointerEvents	= 'none';
         css3dElement.appendChild( webglCanvas );
     
-        //let url		= 'https://mobile-app1-techinc1.installprogram.eu/htmlGames/3.16.0/launch/thunderstruckIIDesktop_TheForce_3_4_1_35/mgs/thunderstruckIIDesktop?displayName=Thunderstruck+II&moduleId=12772&clientId=50300&clientTypeId=70&languageCode=en&productId=5007&market=dotcom&brand=islandparadise&loginType=InterimUPE&returnUrl=https://mobile-app1-techinc1.installprogram.eu/lobby/en/IslandParadise/games/&routerEndPoints=&currencyFormat=&isPracticePlay=False&username=DeathWish31&password=test1234$&formFactor=desktop';
         let domElement	= document.createElement('iframe');
         domElement.src	= url;
         domElement.style.border	= 'none';
